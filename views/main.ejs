@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>memo-💬</title>
+</head>
+<body>
+    <h1 id="pageTitle">{메모사이트}</h1>
+    <div id="add">
+        <form action="/add" method="post">
+            제목 <input id="addTitle" type="text" name="title" placeholder="제목을 입력"><br>
+            내용 <textarea id="addContent" type="text" name="content" placeholder="내용을 입력"></textarea>
+            <button id="submit">적기</button>
+        </form>
+    </div>
+    <div id="memo">
+        <% for(var i = 0; i < data['data'].length; i++){ %>
+            <memo>
+                <h1 id="title"><%= data['data'][i]['title'] %></h1><br>
+                <p id="content"><%= data['data'][i]['content'] %></p>
+                <p id="time"><%= data['data'][i]['time'] %></p>
+            </memo>
+        <% } %>
+    </div>
+</body>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+    html{
+        background-color: rgb(211, 211, 211);
+        font-family: 'Jua', sans-serif;
+    }
+
+    #submit{
+        width: 50px;
+        height: 30px;
+        border: none;
+        border-radius: 5px;
+    }
+
+    #suibmit:hover{
+        background-color: aqua;
+    }
+
+    input, textarea{
+        border: none;
+        border-radius: 10px;
+        width: 200px;
+        height: 30px;
+        margin: 10px;
+    }
+    
+    #pageTitle{
+        font-size: 50px;
+    }
+
+    memo{
+        width: fit-content;
+        height: fit-content;
+        background-color: whitesmoke;
+        margin: 10px;
+        padding: 7px;
+        padding-top: 0px;
+        display: inline-block;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    memo #title{
+        font-size: 45px;
+        background-color: rgb(211, 211, 211);
+        border-radius: 20px;
+        padding: 3px;
+    }
+
+    memo #content{
+        font-size: 30px;
+        margin-top: 1px;
+    }
+
+    #add{
+        padding: 10px;
+        width: fit-content;
+        height: fit-content;
+        border-radius: 10px;
+        background-color: whitesmoke;
+        margin: 20px;
+        font-size: 30px;
+    }
+</style>
+<script>
+    $(function(){
+        $('#submit').click(function(){
+            if($('#addTitle').val().trim() == ""){
+                alert('제목이 없습니다!');
+            } else if($('#addContent').val().trim() == ""){
+                alert('내용이 없습니다!');
+            }
+        });
+    });
+</script>
+</html>
